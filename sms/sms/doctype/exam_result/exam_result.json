@@ -1,0 +1,134 @@
+{
+ "doctype": "DocType",
+ "name": "Exam Result",
+ "module": "Sms",
+ "autoname": "RES-.YYYY.-.#####",
+ "naming_rule": "Expression",
+ "track_changes": 1,
+ "field_order": [
+  "student",
+  "student_name",
+  "academic_year",
+  "column_break_1",
+  "exam_type",
+  "semester",
+  "result_date",
+  "section_results",
+  "results",
+  "section_summary",
+  "total_marks",
+  "total_max_marks",
+  "overall_percentage",
+  "overall_grade",
+  "result_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "label": "Student",
+   "options": "Student",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "student_name",
+   "fieldtype": "Data",
+   "label": "Student Name",
+   "fetch_from": "student.full_name",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "academic_year",
+   "fieldtype": "Link",
+   "label": "Academic Year",
+   "options": "Academic Year",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "exam_type",
+   "fieldtype": "Select",
+   "label": "Exam Type",
+   "options": "\nMidterm\nFinal\nQuiz\nAssignment\nPractical",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "semester",
+   "fieldtype": "Select",
+   "label": "Semester",
+   "options": "\n1\n2\n3\n4\n5\n6\n7\n8"
+  },
+  {
+   "fieldname": "result_date",
+   "fieldtype": "Date",
+   "label": "Result Date",
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_results",
+   "fieldtype": "Section Break",
+   "label": "Course Results"
+  },
+  {
+   "fieldname": "results",
+   "fieldtype": "Table",
+   "label": "Result Details",
+   "options": "Result Detail"
+  },
+  {
+   "fieldname": "section_summary",
+   "fieldtype": "Section Break",
+   "label": "Summary"
+  },
+  {
+   "fieldname": "total_marks",
+   "fieldtype": "Float",
+   "label": "Total Marks Obtained",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_max_marks",
+   "fieldtype": "Float",
+   "label": "Total Max Marks",
+   "read_only": 1
+  },
+  {
+   "fieldname": "overall_percentage",
+   "fieldtype": "Percent",
+   "label": "Overall Percentage",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "overall_grade",
+   "fieldtype": "Data",
+   "label": "Overall Grade",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "result_status",
+   "fieldtype": "Select",
+   "label": "Result Status",
+   "options": "\nPass\nFail\nWithheld",
+   "read_only": 1,
+   "in_list_view": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ]
+}

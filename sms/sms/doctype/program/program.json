@@ -1,0 +1,79 @@
+{
+ "doctype": "DocType",
+ "name": "Program",
+ "module": "Sms",
+ "autoname": "field:program_code",
+ "naming_rule": "By fieldname",
+ "title_field": "program_name",
+ "track_changes": 1,
+ "field_order": [
+  "program_name",
+  "program_code",
+  "department",
+  "column_break_1",
+  "duration_years",
+  "total_credits",
+  "is_active",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "program_name",
+   "fieldtype": "Data",
+   "label": "Program Name",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "program_code",
+   "fieldtype": "Data",
+   "label": "Program Code",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "duration_years",
+   "fieldtype": "Int",
+   "label": "Duration (Years)",
+   "default": "4"
+  },
+  {
+   "fieldname": "total_credits",
+   "fieldtype": "Int",
+   "label": "Total Credits Required"
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "Is Active",
+   "default": "1"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  }
+ ]
+}

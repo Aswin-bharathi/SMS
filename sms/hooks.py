@@ -1,0 +1,6 @@
+app_name = "sms"
+app_title = "Sms"
+app_publisher = "Your Name"
+app_description = "Student Management System"
+app_email = "your@email.com"
+app_license = "MIT"

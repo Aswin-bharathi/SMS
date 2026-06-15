@@ -1,0 +1,2 @@
+include MANIFEST.in
+recursive-include sms *.json *.js *.css *.html *.png *.jpg *.jpeg *.gif *.svg *.ico *.woff *.woff2 *.ttf *.eot
