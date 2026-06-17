@@ -118,14 +118,21 @@
 import { useRoute } from 'vue-router'
 import {
   GraduationCap, LayoutDashboard, Users, CalendarCheck,
-  CreditCard, FileText, BookOpen, Settings, X, Building2, CalendarRange, GraduationCap as ProgramIcon
+  CreditCard, FileText, BookOpen, Settings, X, Building2,
+  CalendarRange, Network, GraduationCap as ProgramIcon
 } from 'lucide-vue-next'
 
 defineProps({ collapsed: Boolean, mobileOpen: Boolean })
 const emit = defineEmits(['close-mobile'])
 const route = useRoute()
 
-const isItemActive = (item) => !item.disabled && route.path === item.to
+const isItemActive = (item) => {
+  if (item.disabled) return false
+  // Dashboard requires exact match (otherwise it'd be active on every page)
+  if (item.to === '/') return route.path === '/'
+  // Other items: active if current path starts with the nav path
+  return route.path === item.to || route.path.startsWith(item.to + '/')
+}
 
 const handleNavigate = (item, navigate) => {
   if (item.disabled) return
@@ -134,17 +141,18 @@ const handleNavigate = (item, navigate) => {
 }
 
 const navItems = [
-  { name: 'Dashboard',  to: '/',           icon: LayoutDashboard },
-  { name: 'Students',   to: '/students',   icon: Users },
-  { name: 'Attendance', to: '/attendance', icon: CalendarCheck },
-  { name: 'Fees',       to: '/fees',       icon: CreditCard },
-  { name: 'Fee Structures', to: '/fee-structures', icon: FileText },
-  { name: 'Results',    to: '/results',    icon: FileText },
-  { name: 'Courses',    to: '/courses',    icon: BookOpen },
-  { name: 'Departments', to: '/departments', icon: Building2 },
-  { name: 'Programs',    to: '/programs',    icon: ProgramIcon },
-  { name: 'Academic Years', to: '/academic-years', icon: CalendarRange },
-  { name: 'Settings',   to: '/settings',   icon: Settings },
+  { name: 'Dashboard',      to: '/',                icon: LayoutDashboard },
+  { name: 'Academics',      to: '/academics',       icon: Network },           // ← NEW
+  { name: 'Students',       to: '/students',        icon: Users },
+  { name: 'Attendance',     to: '/attendance',      icon: CalendarCheck },
+  { name: 'Fees',           to: '/fees',            icon: CreditCard },
+  { name: 'Fee Structures', to: '/fee-structures',  icon: FileText },
+  { name: 'Results',        to: '/results',         icon: FileText },
+  { name: 'Courses',        to: '/courses',         icon: BookOpen },
+  { name: 'Departments',    to: '/departments',     icon: Building2 },
+  { name: 'Programs',       to: '/programs',        icon: ProgramIcon },
+  { name: 'Academic Years', to: '/academic-years',  icon: CalendarRange },
+  { name: 'Settings',       to: '/settings',        icon: Settings },
 ]
 </script>
 

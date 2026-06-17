@@ -1,0 +1,135 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{department}-{batch_year}",
+ "creation": "2026-06-16 22:13:58.685945",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "department",
+  "batch_year",
+  "column_break_1",
+  "program",
+  "class_in_charge",
+  "section_semester",
+  "current_semester",
+  "total_semesters",
+  "column_break_2",
+  "is_active",
+  "academic_year",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Department",
+   "options": "Department",
+   "reqd": 1
+  },
+  {
+   "description": "e.g. 2023-2027",
+   "fieldname": "batch_year",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Batch Year",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Program",
+   "options": "Program"
+  },
+  {
+   "description": "Staff member responsible for attendance",
+   "fieldname": "class_in_charge",
+   "fieldtype": "Link",
+   "label": "Class In-Charge",
+   "options": "User"
+  },
+  {
+   "fieldname": "section_semester",
+   "fieldtype": "Section Break",
+   "label": "Semester Info"
+  },
+  {
+   "default": "Sem 1",
+   "fieldname": "current_semester",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Current Semester",
+   "options": "\nSem 1\nSem 2\nSem 3\nSem 4\nSem 5\nSem 6\nSem 7\nSem 8"
+  },
+  {
+   "default": "8",
+   "fieldname": "total_semesters",
+   "fieldtype": "Int",
+   "label": "Total Semesters"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "academic_year",
+   "fieldtype": "Link",
+   "label": "Academic Year",
+   "options": "Academic Year"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nUpcoming\nGraduated\nArchived"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-06-17 08:01:50.424054",
+ "modified_by": "Administrator",
+ "module": "Sms",
+ "name": "Batch",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "batch_year",
+ "sort_order": "DESC",
+ "states": []
+}

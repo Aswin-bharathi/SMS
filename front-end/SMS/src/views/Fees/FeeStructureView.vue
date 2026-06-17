@@ -65,7 +65,7 @@
             <select v-model="form.program" class="input-field" required>
               <option value="">Select Program</option>
               <option v-for="program in programs" :key="program.name" :value="program.name">
-                {{ program.program_code }} - {{ program.program_name }}
+               {{ program.program_name }}
               </option>
             </select>
           </div>
@@ -135,7 +135,7 @@ const activeCount = computed(() => structures.value.filter((row) => Number(row.i
 
 const programLabel = (programName) => {
   const program = programs.value.find((row) => row.name === programName)
-  return program ? `${program.program_code} - ${program.program_name}` : programName || '-'
+  return program ? program.program_name : programName || '-'
 }
 
 const fetchStructures = async () => {
@@ -185,6 +185,7 @@ const deleteStructure = async () => {
   showDelete.value = false
   await fetchStructures()
 }
+
 
 onMounted(async () => {
   programs.value = await callApi('sms.api.meta.get_programs')

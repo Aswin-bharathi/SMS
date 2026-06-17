@@ -1,8 +1,7 @@
 <template>
   <div class="space-y-6">
     <!-- Back -->
-    <button @click="$router.back()" class="flex items-center gap-2 text-sm text-gray-400
-                                           hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
+    <button @click="$router.back()" class="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
       <ArrowLeft class="w-4 h-4" />
       Back to Students
     </button>
@@ -50,24 +49,25 @@
 
       <!-- Tabs -->
       <div class="overflow-x-auto">
-      <div class="flex w-max items-center gap-1 bg-white dark:bg-gray-800 p-1 rounded-2xl
-                  border border-gray-100 dark:border-gray-700">
-        <button
-          v-for="tab in tabs"
-          :key="tab.key"
-          @click="activeTab = tab.key"
-          :class="[
-            'px-4 py-2 rounded-xl text-sm font-medium transition-all',
-            activeTab === tab.key
-              ? 'bg-primary-600 text-white shadow-sm'
-              : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
-          ]"
-        >
-          {{ tab.label }}
-        </button>
-      </div>
+        <div class="flex w-max items-center gap-1 bg-white dark:bg-gray-800 p-1 rounded-2xl
+                    border border-gray-100 dark:border-gray-700">
+          <button
+            v-for="tab in tabs"
+            :key="tab.key"
+            @click="activeTab = tab.key"
+            :class="[
+              'px-4 py-2 rounded-xl text-sm font-medium transition-all',
+              activeTab === tab.key
+                ? 'bg-primary-600 text-white shadow-sm'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
+            ]"
+          >
+            {{ tab.label }}
+          </button>
+        </div>
       </div>
 
+      <!-- Summary Cards -->
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <div v-for="item in recordSummary" :key="item.label" class="card !p-4">
           <p class="text-sm text-gray-400 dark:text-gray-500">{{ item.label }}</p>
@@ -77,47 +77,102 @@
 
       <!-- Tab Content -->
       <div class="animate-fade-in">
+
         <!-- Overview Tab -->
         <div v-if="activeTab === 'overview'" class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+          <!-- Personal Details -->
           <div class="card space-y-4">
             <h2 class="font-bold text-gray-800 dark:text-white">Personal Details</h2>
-            <div class="space-y-3">
-              <InfoRow label="Full Name" :value="studentName" />
-              <InfoRow label="Date of Birth" :value="student.date_of_birth" />
-              <InfoRow label="Gender" :value="student.gender" />
-              <InfoRow label="Blood Group" :value="student.blood_group" />
-              <InfoRow label="Nationality" :value="student.nationality" />
+            <div class="space-y-1">
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Full Name</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ studentName || '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Date of Birth</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.date_of_birth || '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Gender</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.gender || '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Blood Group</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.blood_group || '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Nationality</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.nationality || '—' }}</span>
+              </div>
             </div>
           </div>
 
+          <!-- Academic Details -->
           <div class="card space-y-4">
             <h2 class="font-bold text-gray-800 dark:text-white">Academic Details</h2>
-            <div class="space-y-3">
-              <InfoRow label="Program" :value="student.program" />
-              <InfoRow label="Department" :value="student.department" />
-              <InfoRow label="Academic Year" :value="student.academic_year" />
-              <InfoRow label="Semester" :value="student.current_semester ? `Semester ${student.current_semester}` : '—'" />
-              <InfoRow label="Enrollment Date" :value="student.enrollment_date" />
+            <div class="space-y-1">
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Program</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.program || '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Department</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.department || '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Academic Year</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.academic_year || '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Semester</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.current_semester ? `Semester ${student.current_semester}` : '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Enrollment Date</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.enrollment_date || '—' }}</span>
+              </div>
             </div>
           </div>
 
+          <!-- Contact Details -->
           <div class="card space-y-4">
             <h2 class="font-bold text-gray-800 dark:text-white">Contact Details</h2>
-            <div class="space-y-3">
-              <InfoRow label="Email" :value="student.email" />
-              <InfoRow label="Phone" :value="student.phone" />
-              <InfoRow label="Address" :value="student.address" />
+            <div class="space-y-1">
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Email</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.email || '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Phone</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.phone || '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Address</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.address || '—' }}</span>
+              </div>
             </div>
           </div>
 
+          <!-- Guardian Details -->
           <div class="card space-y-4">
             <h2 class="font-bold text-gray-800 dark:text-white">Guardian Details</h2>
-            <div class="space-y-3">
-              <InfoRow label="Guardian" :value="student.guardian_name" />
-              <InfoRow label="Guardian Phone" :value="student.guardian_phone" />
-              <InfoRow label="Record Created" :value="student.creation" />
+            <div class="space-y-1">
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Guardian</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.guardian_name || '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Guardian Phone</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.guardian_phone || '—' }}</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+                <span class="text-sm text-gray-400">Record Created</span>
+                <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ student.creation || '—' }}</span>
+              </div>
             </div>
           </div>
+
         </div>
 
         <!-- Attendance Tab -->
@@ -127,8 +182,7 @@
             <div
               v-for="att in attendance"
               :key="att.name"
-              class="flex items-center justify-between p-3 rounded-xl
-                     bg-gray-50 dark:bg-gray-700/50"
+              class="flex items-center justify-between p-3 rounded-xl bg-gray-50 dark:bg-gray-700/50"
             >
               <div class="flex items-center gap-3">
                 <div :class="['w-2 h-2 rounded-full', att.status === 'Present' ? 'bg-green-500' : 'bg-red-500']" />
@@ -150,8 +204,7 @@
             <div
               v-for="fee in fees"
               :key="fee.name"
-              class="flex flex-col gap-3 p-4 rounded-xl border
-                     border-gray-100 dark:border-gray-700 sm:flex-row sm:items-center sm:justify-between"
+              class="flex flex-col gap-3 p-4 rounded-xl border border-gray-100 dark:border-gray-700 sm:flex-row sm:items-center sm:justify-between"
             >
               <div>
                 <p class="font-medium text-gray-800 dark:text-white">{{ fee.fee_type }}</p>
@@ -186,9 +239,7 @@
                   <p class="text-2xl font-bold text-primary-600 dark:text-primary-400">
                     {{ result.overall_percentage?.toFixed(1) }}%
                   </p>
-                  <p class="text-sm font-semibold text-gray-500">
-                    Grade: {{ result.overall_grade }}
-                  </p>
+                  <p class="text-sm font-semibold text-gray-500">Grade: {{ result.overall_grade }}</p>
                 </div>
               </div>
               <div class="mt-3 h-2 rounded-full bg-gray-100 dark:bg-gray-700">
@@ -201,6 +252,7 @@
           </div>
           <p v-else class="text-center text-gray-400 py-8">No results found.</p>
         </div>
+
       </div>
     </div>
 
@@ -225,17 +277,6 @@ import Modal from '@/components/ui/Modal.vue'
 import StudentForm from './StudentForm.vue'
 import { useStudentStore } from '@/stores/student'
 import { useApi } from '@/composables/useApi'
-
-// Simple InfoRow component inline
-const InfoRow = {
-  props: ['label', 'value'],
-  template: `
-    <div class="flex items-center justify-between py-2 border-b border-gray-50 dark:border-gray-700/50 last:border-0">
-      <span class="text-sm text-gray-400 dark:text-gray-500">{{ label }}</span>
-      <span class="text-sm font-medium text-gray-700 dark:text-gray-200">{{ value || '—' }}</span>
-    </div>
-  `
-}
 
 const route = useRoute()
 const studentStore = useStudentStore()
@@ -291,10 +332,7 @@ onMounted(async () => {
     await studentStore.fetchStudent(id)
     student.value = studentStore.currentStudent
 
-    // Load related data
-    attendance.value = await callApi('sms.api.attendance.get_attendance', {
-      student: id
-    })
+    attendance.value = await callApi('sms.api.attendance.get_attendance', { student: id })
     fees.value = await callApi('sms.api.fee.get_fees', { student: id })
     results.value = await callApi('sms.api.result.get_results', { student: id })
   } finally {

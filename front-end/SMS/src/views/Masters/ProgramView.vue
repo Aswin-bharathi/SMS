@@ -11,25 +11,25 @@
       </button>
     </div>
 
+   <!-- Replace the 3 stat cards with these -->
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-      <div class="card !p-5">
+      <div class="card !p-5 cursor-pointer transition-all"
+          :class="statusFilter === '' ? 'ring-2 ring-primary-500' : 'hover:ring-2 hover:ring-primary-400'"
+          @click="statusFilter = ''">
         <p class="text-sm text-slate-500 dark:text-slate-400">Total Programs</p>
         <p class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">{{ programs.length }}</p>
       </div>
-      <div class="card !p-5">
+      <div class="card !p-5 cursor-pointer transition-all"
+          :class="statusFilter === 'active' ? 'ring-2 ring-emerald-500' : 'hover:ring-2 hover:ring-emerald-400'"
+          @click="statusFilter = 'active'">
         <p class="text-sm text-slate-500 dark:text-slate-400">Active Programs</p>
         <p class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">{{ activeCount }}</p>
       </div>
-      <div class="card !p-5">
-        <p class="text-sm text-slate-500 dark:text-slate-400">Visible Rows</p>
-        <p class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">{{ filteredPrograms.length }}</p>
-      </div>
-    </div>
-
-    <div class="card !p-4">
-      <div class="relative">
-        <Search class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-        <input v-model="search" class="input-field py-2 pl-9 text-sm" placeholder="Search programs..." />
+      <div class="card !p-5 cursor-pointer transition-all"
+          :class="statusFilter === 'inactive' ? 'ring-2 ring-rose-500' : 'hover:ring-2 hover:ring-rose-400'"
+          @click="statusFilter = 'inactive'">
+        <p class="text-sm text-slate-500 dark:text-slate-400">Inactive Programs</p>
+        <p class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">{{ inactiveCount }}</p>
       </div>
     </div>
 
@@ -84,8 +84,8 @@
             <label class="label">Department *</label>
             <select v-model="form.department" class="input-field" required>
               <option value="">Select Department</option>
-              <option v-for="department in departments" :key="department.name" :value="department.name">
-                {{ department.department_code || department.department_name }} - {{ department.department_name }}
+              <option v-for="dept in departments" :key="dept.name" :value="dept.name">
+                {{ deptOptionLabel(dept) }}
               </option>
             </select>
           </div>
@@ -150,15 +150,30 @@ const defaultForm = {
 
 const columns = ['Program', 'Code', 'Department', 'Years', 'Credits', 'Status', 'Actions']
 
+// Add these to script
+const statusFilter = ref('')
+const inactiveCount = computed(() => programs.value.filter((row) => Number(row.is_active) !== 1).length)
+
 const filteredPrograms = computed(() => {
+  let list = programs.value
+  if (statusFilter.value === 'active') list = list.filter((row) => Number(row.is_active) === 1)
+  else if (statusFilter.value === 'inactive') list = list.filter((row) => Number(row.is_active) !== 1)
   const q = search.value.trim().toLowerCase()
-  if (!q) return programs.value
-  return programs.value.filter((row) =>
+  if (!q) return list
+  return list.filter((row) =>
     [row.program_name, row.program_code, row.department]
       .filter(Boolean)
-      .some((value) => String(value).toLowerCase().includes(q))
+      .some((v) => String(v).toLowerCase().includes(q))
   )
 })
+
+// Replace deptOptionLabel or just fix the option directly:
+const deptOptionLabel = (dept) => {
+  if (dept.department_code && dept.department_code !== dept.department_name) {
+    return `${dept.department_name} (${dept.department_code})`
+  }
+  return dept.department_name
+}
 
 const activeCount = computed(() => programs.value.filter((row) => Number(row.is_active) === 1).length)
 

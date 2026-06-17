@@ -13,6 +13,26 @@ const router = createRouter({
           component: () => import('@/views/Dashboard.vue'),
           meta: { title: 'Dashboard' }
         },
+        // ─── NEW: Hierarchy navigation ─────────────────────────────────────
+        {
+          path: 'academics',
+          name: 'Academics',
+          component: () => import('@/views/Hierarchy/DepartmentsView.vue'),
+          meta: { title: 'Academics' }
+        },
+        {
+          path: 'academics/:dept/batches',
+          name: 'DeptBatches',
+          component: () => import('@/views/Hierarchy/BatchesView.vue'),
+          meta: { title: 'Batches' }
+        },
+        {
+          path: 'batches/:batch',
+          name: 'BatchDetail',
+          component: () => import('@/views/Hierarchy/BatchDetailView.vue'),
+          meta: { title: 'Batch Detail' }
+        },
+        // ─── Existing routes ────────────────────────────────────────────────
         {
           path: 'students',
           name: 'Students',

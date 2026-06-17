@@ -11,16 +11,23 @@
       </button>
     </div>
 
+    <!-- Replace the 3 stat cards -->
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-      <div class="card !p-5">
+      <div class="card !p-5 cursor-pointer transition-all"
+          :class="statusFilter === '' ? 'ring-2 ring-primary-500' : 'hover:ring-2 hover:ring-primary-400'"
+          @click="statusFilter = ''">
         <p class="text-sm text-slate-500 dark:text-slate-400">Total Years</p>
         <p class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">{{ academicYears.length }}</p>
       </div>
-      <div class="card !p-5">
+      <div class="card !p-5 cursor-pointer transition-all"
+          :class="statusFilter === 'current' ? 'ring-2 ring-emerald-500' : 'hover:ring-2 hover:ring-emerald-400'"
+          @click="statusFilter = 'current'">
         <p class="text-sm text-slate-500 dark:text-slate-400">Current Year</p>
         <p class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">{{ currentYearLabel }}</p>
       </div>
-      <div class="card !p-5">
+      <div class="card !p-5 cursor-pointer transition-all"
+          :class="statusFilter === 'archived' ? 'ring-2 ring-slate-500' : 'hover:ring-2 hover:ring-slate-400'"
+          @click="statusFilter = 'archived'">
         <p class="text-sm text-slate-500 dark:text-slate-400">Visible Rows</p>
         <p class="mt-2 text-2xl font-bold text-slate-900 dark:text-white">{{ filteredAcademicYears.length }}</p>
       </div>
@@ -132,16 +139,21 @@ const defaultForm = {
 
 const columns = ['Academic Year', 'Start Date', 'End Date', 'Status', 'Actions']
 
+// Add to script
+const statusFilter = ref('')
+
 const filteredAcademicYears = computed(() => {
+  let list = academicYears.value
+  if (statusFilter.value === 'current') list = list.filter((row) => Number(row.is_current) === 1)
+  else if (statusFilter.value === 'archived') list = list.filter((row) => Number(row.is_current) !== 1)
   const q = search.value.trim().toLowerCase()
-  if (!q) return academicYears.value
-  return academicYears.value.filter((row) =>
+  if (!q) return list
+  return list.filter((row) =>
     [row.year_name, row.start_date, row.end_date]
       .filter(Boolean)
-      .some((value) => String(value).toLowerCase().includes(q))
+      .some((v) => String(v).toLowerCase().includes(q))
   )
 })
-
 const currentYearLabel = computed(() => {
   const current = academicYears.value.find((row) => Number(row.is_current) === 1)
   return current ? current.year_name : 'None'

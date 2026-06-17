@@ -1,13 +1,9 @@
 {
- "doctype": "DocType",
- "name": "Student",
- "module": "Sms",
+ "actions": [],
  "autoname": "field:student_id",
- "naming_rule": "By fieldname",
- "title_field": "full_name",
- "image_field": "student_image",
- "search_fields": "full_name,student_id,email",
- "track_changes": 1,
+ "creation": "2026-06-15 14:38:14.848662",
+ "doctype": "DocType",
+ "engine": "InnoDB",
  "field_order": [
   "section_personal",
   "student_id",
@@ -36,7 +32,10 @@
   "current_semester",
   "column_break_3",
   "enrollment_date",
-  "status"
+  "status",
+  "roll_number",
+  "semester",
+  "user"
  ],
  "fields": [
   {
@@ -47,31 +46,31 @@
   {
    "fieldname": "student_id",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Student ID",
    "reqd": 1,
-   "unique": 1,
-   "in_list_view": 1
+   "unique": 1
   },
   {
    "fieldname": "first_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "First Name",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
    "fieldname": "last_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Last Name",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
    "fieldname": "full_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Full Name",
-   "read_only": 1,
-   "in_list_view": 1
+   "read_only": 1
   },
   {
    "fieldname": "student_image",
@@ -91,10 +90,10 @@
   {
    "fieldname": "gender",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Gender",
    "options": "\nMale\nFemale\nOther",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
    "fieldname": "blood_group",
@@ -103,10 +102,10 @@
    "options": "\nA+\nA-\nB+\nB-\nO+\nO-\nAB+\nAB-"
   },
   {
+   "default": "Indian",
    "fieldname": "nationality",
    "fieldtype": "Data",
-   "label": "Nationality",
-   "default": "Indian"
+   "label": "Nationality"
   },
   {
    "fieldname": "section_contact",
@@ -116,9 +115,9 @@
   {
    "fieldname": "email",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Email",
-   "options": "Email",
-   "in_list_view": 1
+   "options": "Email"
   },
   {
    "fieldname": "phone",
@@ -152,21 +151,21 @@
    "label": "Academic Information"
   },
   {
+   "default": "UG",
    "fieldname": "program_level",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Program Level",
    "options": "\nUG\nPG",
-   "default": "UG",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
    "fieldname": "program",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Program",
    "options": "Program",
-   "reqd": 1,
-   "in_list_view": 1
+   "reqd": 1
   },
   {
    "fieldname": "department",
@@ -182,9 +181,10 @@
   },
   {
    "fieldname": "batch",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Batch",
-   "in_list_view": 1
+   "options": "Batch"
   },
   {
    "fieldname": "current_semester",
@@ -197,32 +197,70 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Today",
    "fieldname": "enrollment_date",
    "fieldtype": "Date",
-   "label": "Enrollment Date",
-   "default": "Today"
+   "label": "Enrollment Date"
   },
   {
+   "default": "Active",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
-   "options": "\nActive\nInactive\nGraduated\nDropped",
-   "default": "Active",
-   "in_list_view": 1
+   "options": "\nActive\nInactive\nGraduated\nDropped"
+  },
+  {
+   "description": "Unique within department",
+   "fieldname": "roll_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Roll Number"
+  },
+  {
+   "fieldname": "semester",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Current Semester",
+   "options": "\nSem 1\nSem 2\nSem 3\nSem 4\nSem 5\nSem 6\nSem 7\nSem 8"
+  },
+  {
+   "description": "Linked user for portal login",
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User Account",
+   "options": "User"
   }
  ],
+ "image_field": "student_image",
+ "links": [],
+ "modified": "2026-06-16 22:14:10.219960",
+ "modified_by": "Administrator",
+ "module": "Sms",
+ "name": "Student",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
  "permissions": [
   {
-   "role": "System Manager",
-   "read": 1,
-   "write": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
+   "read": 1,
    "report": 1,
-   "share": 1
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
   }
- ]
+ ],
+ "row_format": "Dynamic",
+ "search_fields": "full_name,student_id,email",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "full_name",
+ "track_changes": 1
 }
