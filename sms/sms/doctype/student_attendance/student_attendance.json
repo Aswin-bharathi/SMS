@@ -18,7 +18,15 @@
   "remarks",
   "marked_by",
   "hour",
-  "date"
+  "date",
+  "subject",
+  "faculty",
+  "timetable_slot",
+  "substitution",
+  "marked_at",
+  "last_edited_by",
+  "last_edited_at",
+  "edit_count"
  ],
  "fields": [
   {
@@ -107,11 +115,11 @@
   },
   {
    "fieldname": "hour",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Hour",
-   "options": "\nHour 1\nHour 2\nHour 3\nHour 4\nHour 5\nHour 6\nHour 7\nHour 8"
+   "options": "Hour Slot"
   },
   {
    "fieldname": "date",
@@ -120,10 +128,65 @@
    "in_standard_filter": 1,
    "label": "Date",
    "reqd": 1
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Subject",
+   "options": "Subject"
+  },
+  {
+   "fieldname": "faculty",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Faculty",
+   "options": "User"
+  },
+  {
+   "fieldname": "timetable_slot",
+   "fieldtype": "Link",
+   "label": "Timetable Slot",
+   "options": "Timetable Slot",
+   "read_only": 1
+  },
+  {
+   "fieldname": "substitution",
+   "fieldtype": "Link",
+   "label": "Substitution",
+   "options": "Staff Substitution",
+   "read_only": 1
+  },
+  {
+   "fieldname": "marked_at",
+   "fieldtype": "Datetime",
+   "label": "Marked At",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_edited_by",
+   "fieldtype": "Link",
+   "label": "Last Edited By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_edited_at",
+   "fieldtype": "Datetime",
+   "label": "Last Edited At",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "edit_count",
+   "fieldtype": "Int",
+   "label": "Edit Count",
+   "read_only": 1
   }
  ],
  "links": [],
- "modified": "2026-06-16 22:38:33.916919",
+ "modified": "2026-06-17 22:18:40.097672",
  "modified_by": "Administrator",
  "module": "Sms",
  "name": "Student Attendance",

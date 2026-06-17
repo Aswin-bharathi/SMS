@@ -1,0 +1,88 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-06-17 22:15:56.435078",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "day",
+  "hour",
+  "subject",
+  "faculty",
+  "room",
+  "is_lab",
+  "notes"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "day",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Day",
+   "options": "Monday\nTuesday\nWednesday\nThursday\nFriday\nSaturday",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "hour",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Hour",
+   "options": "Hour Slot",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "subject",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Subject",
+   "options": "Subject",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "faculty",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Faculty",
+   "options": "User"
+  },
+  {
+   "columns": 1,
+   "fieldname": "room",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Room"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "is_lab",
+   "fieldtype": "Check",
+   "label": "Lab"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-06-17 22:15:56.435078",
+ "modified_by": "Administrator",
+ "module": "Sms",
+ "name": "Timetable Slot",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

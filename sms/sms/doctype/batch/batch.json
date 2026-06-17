@@ -18,7 +18,8 @@
   "column_break_2",
   "is_active",
   "academic_year",
-  "status"
+  "status",
+  "year_level"
  ],
  "fields": [
   {
@@ -102,12 +103,21 @@
    "in_standard_filter": 1,
    "label": "Status",
    "options": "Active\nUpcoming\nGraduated\nArchived"
+  },
+  {
+   "description": "Auto-computed from current semester unless PG",
+   "fieldname": "year_level",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Year Level",
+   "options": "\nI UG\nII UG\nIII UG\nIV UG\nI PG\nII PG"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-06-17 08:01:50.424054",
+ "modified": "2026-06-17 22:16:43.104329",
  "modified_by": "Administrator",
  "module": "Sms",
  "name": "Batch",
