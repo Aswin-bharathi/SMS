@@ -50,8 +50,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Course",
-   "options": "Course",
-   "reqd": 1
+   "options": "Course"
   },
   {
    "fieldname": "department",
@@ -82,16 +81,14 @@
    "fieldname": "attendance_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Attendance Date",
-   "reqd": 1
+   "label": "Attendance Date"
   },
   {
    "fieldname": "attendance_hour",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Hour",
-   "options": "\n1\n2\n3\n4\n5",
-   "reqd": 1
+   "options": "\n1\n2\n3\n4\n5"
   },
   {
    "fieldname": "status",
@@ -186,7 +183,7 @@
   }
  ],
  "links": [],
- "modified": "2026-06-17 22:18:40.097672",
+ "modified": "2026-06-17 22:41:41.233193",
  "modified_by": "Administrator",
  "module": "Sms",
  "name": "Student Attendance",

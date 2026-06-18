@@ -654,37 +654,9 @@ head -20 README.md
 ```
 
 ---
+✅ Bug 1: After save → switches to "Update Attendance" mode correctly
+✅ Bug 2: Date handling → server-side nowdate() always correct
+✅ Bug 3: Edit window → time-aware check using hour end time
+✅ Root cause: Student Attendance DocType had mandatory 'course' + 'attendance_hour' fields blocking saves
 
-## 🌅 Tomorrow's Restart Workflow
-
-When you open a fresh chat tomorrow, just paste this **opening prompt**:
-
-> Continuing the SMS project from yesterday. Please read `README.md` at the project root to understand the current state. We are at **Phase D2** with 3 known bugs in `MarkAttendanceView.vue`:
->
-> 1. After first-time save, screen doesn't refresh to show "Update Attendance" mode for the same day
-> 2. After midnight (12 AM), yesterday's records still appear instead of being empty for today
-> 3. Past hours show edit option enabled even when older than 24h
->
-> The first-time save with all-Present **does work**. Let's start by debugging the backend logic in `sms/api/attendance_v2.py` — specifically `_hour_has_started()`, `_can_edit_for_date()`, and `get_marking_screen()`. After D2 is fixed, we proceed to D3 (Substitutions UI).
->
-> My test login: `mrs.sy@college.local` / `Faculty@123` viewing her Wednesday Hour 1 ADA class for CS-2025-2029.
-
-Paste that and the AI (whether me or another instance) will have **full context** to continue seamlessly.
-
----
-
-## ✅ Final Checklist Before Closing
-
-| Item | Done? |
-|---|---|
-| README.md saved at `apps/sms/README.md` | ☐ |
-| Verified README has the "Known Bugs" section | ☐ |
-| Verified the test credentials are listed | ☐ |
-| `bench` is stopped or running cleanly | ☐ |
-| Frontend dev server stopped (`Ctrl+C`) | ☐ |
-
----
-
-**Get some rest! Tomorrow we'll fix those 3 bugs and proceed to Substitutions UI.** The hard architectural decisions are all done — what remains is polish and feature expansion. 🚀
-
-When you come back, just paste the resume prompt and we'll pick up exactly where we left off.
+----
