@@ -194,3 +194,46 @@ def remove_faculty(mapping_name):
     frappe.delete_doc("Subject Faculty Map", mapping_name, ignore_permissions=True)
     frappe.db.commit()
     return {"message": "Faculty removed from subject"}
+
+@frappe.whitelist(allow_guest=True, methods=["POST"])
+def set_primary_faculty(mapping_name):
+    """Mark a faculty mapping as primary; others become secondary."""
+    if not frappe.db.exists("Subject Faculty Map", mapping_name):
+        frappe.throw(_("Mapping not found"))
+
+    subject = frappe.db.get_value("Subject Faculty Map", mapping_name, "subject")
+
+    # Unset primary on all others for this subject
+    frappe.db.sql("""
+        UPDATE `tabSubject Faculty Map`
+        SET is_primary = 0
+        WHERE subject = %s AND name != %s
+    """, (subject, mapping_name))
+
+    # Set this one as primary
+    frappe.db.set_value("Subject Faculty Map", mapping_name, "is_primary", 1)
+    frappe.db.commit()
+    return {"message": "Primary faculty updated"}
+
+
+@frappe.whitelist(allow_guest=True)
+def get_assignable_faculty(exclude_subject=None):
+    """Get all SMS Staff users — for the faculty assignment dropdown."""
+    users = frappe.db.sql("""
+        SELECT u.name AS email, u.full_name
+        FROM `tabUser` u
+        INNER JOIN `tabHas Role` hr ON hr.parent = u.name
+        WHERE hr.role = 'SMS Staff'
+          AND u.enabled = 1
+        ORDER BY u.full_name
+    """, as_dict=True)
+
+    # If exclude_subject given, filter out already-assigned faculty
+    if exclude_subject:
+        assigned = set(frappe.db.sql_list(
+            "SELECT faculty FROM `tabSubject Faculty Map` WHERE subject = %s",
+            (exclude_subject,)
+        ))
+        users = [u for u in users if u["email"] not in assigned]
+
+    return users

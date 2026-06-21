@@ -149,7 +149,8 @@ import { useRoute } from 'vue-router'
 import {
   GraduationCap, LayoutDashboard, Users, CalendarCheck,
   CreditCard, FileText, BookOpen, Settings, X, Building2,
-  CalendarRange, Network, ChevronUp, LogOut, User,
+  CalendarRange, Network, ChevronUp, LogOut, User, RefreshCcw,
+  BookMarked,
   GraduationCap as ProgramIcon,
 } from 'lucide-vue-next'
 import { useAuth } from '@/composables/useAuth'
@@ -191,18 +192,14 @@ const handleNavigate = (item, navigate) => {
 }
 
 const navItems = [
-  { name: 'Dashboard',      to: '/',                icon: LayoutDashboard },
-  { name: 'Academics',      to: '/academics',       icon: Network },
-  { name: 'Students',       to: '/students',        icon: Users },
-  { name: 'Attendance',     to: '/attendance',      icon: CalendarCheck },
-  { name: 'Fees',           to: '/fees',            icon: CreditCard },
-  { name: 'Fee Structures', to: '/fee-structures',  icon: FileText },
-  { name: 'Results',        to: '/results',         icon: FileText },
-  { name: 'Courses',        to: '/courses',         icon: BookOpen },
-  { name: 'Departments',    to: '/departments',     icon: Building2 },
-  { name: 'Programs',       to: '/programs',        icon: ProgramIcon },
-  { name: 'Academic Years', to: '/academic-years',  icon: CalendarRange },
-  { name: 'Settings',       to: '/settings',        icon: Settings },
+  { name: 'Dashboard',      to: '/',               icon: LayoutDashboard },
+  { name: 'Academics',      to: '/academics',      icon: Network },
+  { name: 'Attendance',     to: '/attendance',     icon: CalendarCheck },
+  { name: 'Substitutions',  to: '/substitutions',  icon: RefreshCcw },
+  { name: 'Subjects',       to: '/subjects',       icon: BookMarked },
+  { name: 'Fees',           to: '/fees',           icon: CreditCard },
+  { name: 'Fee Structures', to: '/fee-structures', icon: FileText },
+  { name: 'Settings',       to: '/settings',       icon: Settings },
 ]
 </script>
 

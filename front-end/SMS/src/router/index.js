@@ -4,7 +4,7 @@ import { useAuth } from '@/composables/useAuth'
 const router = createRouter({
   history: createWebHistory('/student-app/'),
   routes: [
-    // ─── Public route: login ─────────────────────────────────────────────
+    // ─── Public: login ───────────────────────────────────────────────────
     {
       path: '/login',
       name: 'Login',
@@ -12,19 +12,21 @@ const router = createRouter({
       meta: { public: true, title: 'Sign In' },
     },
 
-    // ─── Protected routes (require login) ────────────────────────────────
+    // ─── Protected (auth required) ───────────────────────────────────────
     {
       path: '/',
       component: () => import('@/components/layout/AppLayout.vue'),
       meta: { requiresAuth: true },
       children: [
+        // Dashboard
         {
           path: '',
           name: 'Dashboard',
           component: () => import('@/views/Dashboard.vue'),
           meta: { title: 'Dashboard' },
         },
-        // Hierarchy navigation
+
+        // ─── Academics hierarchy ──────────────────────────────────────
         {
           path: 'academics',
           name: 'Academics',
@@ -43,19 +45,16 @@ const router = createRouter({
           component: () => import('@/views/Hierarchy/BatchDetailView.vue'),
           meta: { title: 'Batch Detail' },
         },
-        // Existing routes
-        {
-          path: 'students',
-          name: 'Students',
-          component: () => import('@/views/Students/StudentList.vue'),
-          meta: { title: 'Students' },
-        },
+
+        // ─── Student detail (no list — list lives inside Academics) ──
         {
           path: 'students/:id',
           name: 'StudentDetail',
           component: () => import('@/views/Students/StudentDetail.vue'),
           meta: { title: 'Student Detail' },
         },
+
+        // ─── Attendance ─────────────────────────────────────────────
         {
           path: 'attendance',
           name: 'Attendance',
@@ -69,6 +68,22 @@ const router = createRouter({
           meta: { title: 'Mark Attendance' },
         },
         {
+          path: 'substitutions',
+          name: 'Substitutions',
+          component: () => import('@/views/Attendance/SubstitutionsView.vue'),
+          meta: { title: 'Substitutions' },
+        },
+
+        // ─── Curriculum ─────────────────────────────────────────────
+        {
+          path: 'subjects',
+          name: 'Subjects',
+          component: () => import('@/views/Subjects/SubjectsView.vue'),
+          meta: { title: 'Subjects' },
+        },
+
+        // ─── Fees ───────────────────────────────────────────────────
+        {
           path: 'fees',
           name: 'Fees',
           component: () => import('@/views/Fees/FeeView.vue'),
@@ -80,36 +95,8 @@ const router = createRouter({
           component: () => import('@/views/Fees/FeeStructureView.vue'),
           meta: { title: 'Fee Structures' },
         },
-        {
-          path: 'results',
-          name: 'Results',
-          component: () => import('@/views/Results/ResultView.vue'),
-          meta: { title: 'Results' },
-        },
-        {
-          path: 'courses',
-          name: 'Courses',
-          component: () => import('@/views/Courses/CourseView.vue'),
-          meta: { title: 'Courses' },
-        },
-        {
-          path: 'departments',
-          name: 'Departments',
-          component: () => import('@/views/Masters/DepartmentView.vue'),
-          meta: { title: 'Departments' },
-        },
-        {
-          path: 'programs',
-          name: 'Programs',
-          component: () => import('@/views/Masters/ProgramView.vue'),
-          meta: { title: 'Programs' },
-        },
-        {
-          path: 'academic-years',
-          name: 'AcademicYears',
-          component: () => import('@/views/Masters/AcademicYearView.vue'),
-          meta: { title: 'Academic Years' },
-        },
+
+        // ─── Settings ───────────────────────────────────────────────
         {
           path: 'settings',
           name: 'Settings',
@@ -128,22 +115,19 @@ const router = createRouter({
 })
 
 // ════════════════════════════════════════════════════════════════════════════
-// Auth Guard: runs before every navigation
+// Auth Guard
 // ════════════════════════════════════════════════════════════════════════════
 router.beforeEach(async (to, from, next) => {
   const { isLoggedIn, initialized, fetchMe } = useAuth()
 
-  // Initialize auth on first load
   if (!initialized.value) {
     await fetchMe()
   }
 
-  // Public route → let through
   if (to.meta.public) {
     return next()
   }
 
-  // Protected route + not logged in → redirect to login
   if (to.meta.requiresAuth && !isLoggedIn.value) {
     return next({
       name: 'Login',

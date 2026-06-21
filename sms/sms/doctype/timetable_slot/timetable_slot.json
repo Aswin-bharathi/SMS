@@ -12,7 +12,8 @@
   "faculty",
   "room",
   "is_lab",
-  "notes"
+  "notes",
+  "faculty_2"
  ],
  "fields": [
   {
@@ -68,13 +69,19 @@
    "fieldname": "notes",
    "fieldtype": "Small Text",
    "label": "Notes"
+  },
+  {
+   "fieldname": "faculty_2",
+   "fieldtype": "Link",
+   "label": "Faculty 2",
+   "options": "User"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-06-17 22:15:56.435078",
+ "modified": "2026-06-19 12:03:28.315828",
  "modified_by": "Administrator",
  "module": "Sms",
  "name": "Timetable Slot",
